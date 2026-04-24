@@ -4,7 +4,7 @@ set -eu
 
 echo "当前用户:$USER"
 
-if [ "$EUID" -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     echo "--------------------------------------------------"
     echo "请root运行..."
     exit 1
