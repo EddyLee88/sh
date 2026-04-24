@@ -9,6 +9,15 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/
 sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk.sh -O -)"
 ```
 
+### podman_rustdesk_root.sh
+> 使用Podman配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端(root运行)
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh)"
+# OR
+sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh -O -)"
+```
+
 ### podman_db.sh
 > 使用Podman配置数据库(MySQL/PostgreSQL)
 
