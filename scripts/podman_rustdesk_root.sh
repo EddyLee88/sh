@@ -13,8 +13,8 @@ fi
 echo "--------------------------------------------------"
 echo "初始化配置目录..."
 
-mkdir -p /opt/rustdesk-server/data
 mkdir -p /etc/containers/systemd
+mkdir -p /opt/rustdesk-server/data
 
 echo "--------------------------------------------------"
 echo "配置rustdesk-hbbs服务..."
