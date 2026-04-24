@@ -11,9 +11,18 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 echo "--------------------------------------------------"
+echo "初始化配置目录..."
+
+mkdir -p /opt/rustdesk-server/data
+mkdir -p /etc/containers/systemd
+
+echo "--------------------------------------------------"
 echo "配置rustdesk-hbbs服务..."
 
 cat > /etc/containers/systemd/rustdesk-hbbs.container <<'EOF'
+[Unit]
+Description=RustDesk ID Server(hbbs)
+
 [Container]
 AutoUpdate=registry
 Image=ghcr.io/rustdesk/rustdesk-server:latest
@@ -29,13 +38,17 @@ Restart=always
 RestartSec=10
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
 EOF
 
 echo "--------------------------------------------------"
 echo "配置rustdesk-hbbr服务..."
 
 cat > /etc/containers/systemd/rustdesk-hbbr.container <<'EOF'
+[Unit]
+Description=RustDesk Relay Server(hbbr)
+After=rustdesk-hbbs.service
+
 [Container]
 AutoUpdate=registry
 Image=ghcr.io/rustdesk/rustdesk-server:latest
@@ -51,7 +64,7 @@ Restart=always
 RestartSec=10
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
 EOF
 
 echo "--------------------------------------------------"
@@ -67,11 +80,6 @@ systemctl start rustdesk-hbbs.service
 
 systemctl start rustdesk-hbbr.service
 # systemctl enable --now rustdesk-hbbr.service
-
-echo "--------------------------------------------------"
-echo "配置自动启动/后台运行..."
-
-loginctl enable-linger
 
 echo "--------------------------------------------------"
 echo "配置自动更新..."
