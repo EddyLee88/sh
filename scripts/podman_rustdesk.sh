@@ -5,14 +5,18 @@ set -eu
 echo "当前用户:$USER"
 
 echo "--------------------------------------------------"
-echo "创建Podman服务配置目录..."
+echo "初始化配置目录..."
 
 mkdir -p ~/.config/containers/systemd/
+mkdir -p ~/rustdesk-server/data
 
 echo "--------------------------------------------------"
 echo "配置rustdesk-hbbs服务..."
 
 cat > ~/.config/containers/systemd/rustdesk-hbbs.container <<'EOF'
+[Unit]
+Description=RustDesk ID Server(hbbs)
+
 [Container]
 AutoUpdate=registry
 Image=ghcr.io/rustdesk/rustdesk-server:latest
@@ -35,6 +39,10 @@ echo "--------------------------------------------------"
 echo "配置rustdesk-hbbr服务..."
 
 cat > ~/.config/containers/systemd/rustdesk-hbbr.container <<'EOF'
+[Unit]
+Description=RustDesk Relay Server(hbbr)
+After=rustdesk-hbbs.service
+
 [Container]
 AutoUpdate=registry
 Image=ghcr.io/rustdesk/rustdesk-server:latest
