@@ -1,6 +1,6 @@
 # 常用脚本
 
-### podman_mysql.sh
+- ### podman_mysql.sh
 > 使用[Podman](https://github.com/containers/podman)配置MySQL数据库
 
 ```
@@ -15,7 +15,7 @@ chmod +x podman_mysql.sh
 ./podman_mysql.sh
 ```
 
-### podman_pgsql.sh
+- ### podman_pgsql.sh
 > 使用[Podman](https://github.com/containers/podman)配置PostgreSQL数据库
 
 ```
@@ -30,7 +30,7 @@ chmod +x podman_pgsql.sh
 ./podman_pgsql.sh
 ```
 
-### podman_cpa.sh
+- ### podman_cpa.sh
 > 使用[Podman](https://github.com/containers/podman)配置[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)
 
 ```
@@ -45,7 +45,7 @@ chmod +x podman_cpa.sh
 ./podman_cpa.sh
 ```
 
-### podman_rustdesk.sh
+- ### podman_rustdesk.sh
 > 使用[Podman](https://github.com/containers/podman)配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端
 
 ```
@@ -66,7 +66,7 @@ chmod +x podman_rustdesk.sh
 ./podman_rustdesk.sh
 ```
 
-### podman_rustdesk_root.sh
+- ### podman_rustdesk_root.sh
 > 使用[Podman](https://github.com/containers/podman)配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端(root运行)
 
 ```
