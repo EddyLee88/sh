@@ -14,7 +14,7 @@ echo "配置PostgreSQL服务..."
 
 cat > ~/.config/containers/systemd/postgres18.container <<'EOF'
 [Unit]
-Description=PostgreSQL
+Description=PostgreSQL18
 
 [Container]
 AutoUpdate=registry
