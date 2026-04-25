@@ -25,9 +25,9 @@ Network=host
 Environment="DEPLOY=cloud"
 Environment="PGSTORE_DSN='postgresql://PG_USER:PG_PWD@PG_HOST:PG_PORT/CPA_DB'"
 Environment="PGSTORE_SCHEMA=public"
-Environment="PGSTORE_LOCAL_PATH='/CLIProxyAPI/pgstore'"
+Environment="PGSTORE_LOCAL_PATH='/var/lib/cliproxy'"
 
-Volume=cpadata:/CLIProxyAPI/pgstore
+Volume=cpadata:/var/lib/cliproxy/pgstore
 
 [Service]
 Restart=always
