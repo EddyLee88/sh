@@ -59,7 +59,7 @@ wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk
 # OR
 curl -O https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk.sh
 
-# TODO replace HBBS_PORT/HBBR_PROT with your actual config
+# TODO replace HBBS_PORT/HBBR_PORT with your actual config
 
 chmod +x podman_rustdesk.sh
 
@@ -80,7 +80,7 @@ wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk
 # OR
 curl -O https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh
 
-# TODO replace HBBS_PORT/HBBR_PROT with your actual config
+# TODO replace HBBS_PORT/HBBR_PORT with your actual config
 
 chmod +x podman_rustdesk_root.sh
 
