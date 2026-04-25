@@ -13,6 +13,9 @@ echo "--------------------------------------------------"
 echo "配置PostgreSQL服务..."
 
 cat > ~/.config/containers/systemd/postgres18.container <<'EOF'
+[Unit]
+Description=PostgreSQL
+
 [Container]
 AutoUpdate=registry
 Image=docker.io/library/postgres:18
@@ -37,31 +40,6 @@ WantedBy=default.target
 EOF
 
 echo "--------------------------------------------------"
-echo "配置MySQL服务..."
-
-cat > ~/.config/containers/systemd/mysql8.container <<'EOF'
-[Container]
-AutoUpdate=registry
-Image=docker.io/library/mysql:8
-ContainerName=mysql8
-Network=host
-
-Environment="MYSQL_ROOT_PASSWORD=UR_PWD"
-Environment="MYSQL_DATABASE=UR_DB"
-
-Exec=--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-
-Volume=mysqldata8:/var/lib/mysql
-
-[Service]
-Restart=always
-RestartSec=30
-
-[Install]
-WantedBy=default.target
-EOF
-
-echo "--------------------------------------------------"
 echo "刷新服务列表..."
 
 systemctl --user daemon-reload
@@ -71,9 +49,6 @@ echo "启动服务..."
 
 systemctl --user start postgres18.service
 # systemctl --user enable --now postgres18.service
-
-systemctl --user start mysql8.service
-# systemctl --user enable --now mysql8.service
 
 echo "--------------------------------------------------"
 echo "配置自动启动/后台运行..."
