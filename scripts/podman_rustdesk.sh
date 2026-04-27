@@ -25,7 +25,7 @@ Network=host
 
 Exec=hbbs -p8443
 
-Volume=~/rustdesk-server/data:/root
+Volume=%h/rustdesk-server/data:/root
 
 [Service]
 Restart=always
@@ -51,7 +51,7 @@ Network=host
 
 Exec=hbbr -p8444
 
-Volume=~/rustdesk-server/data:/root
+Volume=%h/rustdesk-server/data:/root
 
 [Service]
 Restart=always
