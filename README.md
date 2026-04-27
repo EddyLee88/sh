@@ -45,6 +45,15 @@ chmod +x podman_cpa.sh
 ./podman_cpa.sh
 ```
 
+- ### podman_caddy.sh
+> 使用[Podman](https://github.com/containers/podman)配置Caddy
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_caddy.sh)"
+# OR
+sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_caddy.sh -O -)"
+```
+
 - ### podman_rustdesk.sh
 > 使用[Podman](https://github.com/containers/podman)配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端
 
