@@ -24,7 +24,9 @@ Image=docker.io/library/caddy:latest
 ContainerName=caddy
 Network=host
 
-Volume=%h/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+Volume=%h/caddy/Caddyfile:/etc/caddy/Caddyfile
+Volume=caddydata:/data
+Volume=caddyconfig:/config
 
 [Service]
 Restart=always
