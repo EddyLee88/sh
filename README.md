@@ -45,6 +45,15 @@ chmod +x podman_cpa.sh
 ./podman_cpa.sh
 ```
 
+- ### podman_codex_manager.sh
+> 使用[Podman](https://github.com/containers/podman)配置[Codex Manager](https://github.com/wenfxl/openai-cpa)
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_codex_manager.sh)"
+# OR
+sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_codex_manager.sh -O -)"
+```
+
 - ### podman_caddy.sh
 > 使用[Podman](https://github.com/containers/podman)配置Caddy
 
