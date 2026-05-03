@@ -28,7 +28,7 @@ Volume=codexdata:/app/data
 
 [Service]
 # ExecStartPre="/usr/bin/git -C %h/openai-cpa pull"
-ExecStartPre="/usr/bin/bash -c 'if [ ! -d %h/openai-cpa/.git ]; then git clone -b main %h/openai-cpa; else git -C %h/openai-cpa pull; fi'"
+ExecStartPre="/usr/bin/bash -c 'if [ ! -d %h/openai-cpa/.git ]; then git clone -b main https://github.com/wenfxl/openai-cpa.git %h/openai-cpa; else git -C %h/openai-cpa pull; fi'"
 Restart=always
 RestartSec=10
 
