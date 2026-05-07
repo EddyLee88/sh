@@ -2,7 +2,8 @@
 
 set -eu
 
-DNS_SERVERS="8.8.8.8 1.1.1.1"
+DNS_SERVER="8.8.8.8"
+FALLBACK_DNS_SERVER="1.1.1.1"
 SWAP_FILE="/swapfile"
 ZRAM_CONFIG="/etc/systemd/zram-generator.conf"
 
@@ -24,7 +25,7 @@ sudo fallocate -l "${MEMORY_GB}G" "$SWAP_FILE"
 sudo chmod 600 "$SWAP_FILE"
 sudo mkswap "$SWAP_FILE"
 sudo swapon "$SWAP_FILE"
-sudo sed -i.bak "\|[[:space:]]${SWAP_FILE}[[:space:]]|d" /etc/fstab
+sudo sed -i.bak "\|^${SWAP_FILE}[[:space:]]|d" /etc/fstab
 echo "$SWAP_FILE none swap sw 0 0" | sudo tee -a /etc/fstab >/dev/null
 
 echo "--------------------------------------------------"
@@ -41,13 +42,13 @@ sudo systemctl daemon-reload
 sudo systemctl restart systemd-zram-setup@zram0.service || sudo systemctl start systemd-zram-setup@zram0.service
 
 echo "--------------------------------------------------"
-echo "设置DNS: ${DNS_SERVERS}..."
+echo "设置DNS: ${DNS_SERVER}, fallback: ${FALLBACK_DNS_SERVER}..."
 
 sudo mkdir -p /etc/systemd/resolved.conf.d
 sudo tee /etc/systemd/resolved.conf.d/dns.conf >/dev/null <<EOF
 [Resolve]
-DNS=${DNS_SERVERS}
-FallbackDNS=${DNS_SERVERS}
+DNS=${DNS_SERVER}
+FallbackDNS=${FALLBACK_DNS_SERVER}
 EOF
 sudo systemctl enable --now systemd-resolved.service
 sudo systemctl restart systemd-resolved.service
