@@ -1,5 +1,14 @@
 # 常用脚本
 
+- ### general.sh
+> Ubuntu/Debian 系服务器常用初始化: 更新软件包、设置 swap、设置 zram、配置 DNS 为 8.8.8.8 和 1.1.1.1
+
+```
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/general.sh)"
+# OR
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/general.sh -O -)"
+```
+
 - ### podman_mysql.sh
 > 使用[Podman](https://github.com/containers/podman)配置MySQL数据库
 
