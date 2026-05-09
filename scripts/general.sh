@@ -64,12 +64,12 @@ EOF
 
 sudo systemctl daemon-reload
 
-if [ "${FORCE_ZRAM_RELOAD:-0}" = "1" ]; then
+if systemctl is-active --quiet systemd-zram-setup@zram0.service; then
   sudo swapoff /dev/zram0 2>/dev/null || true
   sudo systemctl stop systemd-zram-setup@zram0.service 2>/dev/null || true
   sudo zramctl --reset /dev/zram0 2>/dev/null || true
   sudo systemctl start systemd-zram-setup@zram0.service
-elif ! systemctl is-active --quiet systemd-zram-setup@zram0.service; then
+else
   sudo zramctl --reset /dev/zram0 2>/dev/null || true
   sudo systemctl start systemd-zram-setup@zram0.service
 fi
