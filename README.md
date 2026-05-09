@@ -1,7 +1,7 @@
 # 常用脚本
 
 - ### general.sh
-> Ubuntu/Debian 系服务器常用初始化: 更新软件包、设置 swap、设置 zram、配置首选 DNS 为 8.8.8.8、备用 DNS 为 1.1.1.1
+> 一键完成 Ubuntu/Debian 服务器基础初始化。
 
 ```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/general.sh)"

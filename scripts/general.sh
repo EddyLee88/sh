@@ -6,8 +6,12 @@ DNS_SERVER="8.8.8.8"
 FALLBACK_DNS_SERVER="1.1.1.1"
 SWAP_FILE="/swapfile"
 ZRAM_CONFIG="/etc/systemd/zram-generator.conf"
+SYSCTL_CONFIG="/etc/sysctl.d/99-swap.conf"
+FSTAB_SWAP_LINE="${SWAP_FILE} none swap defaults,pri=10 0 0"
+ZRAM_MODULE_PACKAGE="linux-modules-extra-$(uname -r)"
 
 MEMORY_GB=$(awk '/^MemTotal:/ {print int(($2 + 1024 * 1024 - 1) / (1024 * 1024))}' /proc/meminfo)
+SWAP_SIZE_BYTES=$(( MEMORY_GB * 1024 * 1024 * 1024 ))
 ZRAM_SIZE_MB=$(( MEMORY_GB * 1024 / 2 ))
 
 echo "--------------------------------------------------"
@@ -19,20 +23,32 @@ sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
 echo "--------------------------------------------------"
 echo "设置swap分区: ${MEMORY_GB}G..."
 
-sudo swapoff "$SWAP_FILE" 2>/dev/null || true
-sudo sed -i.bak "\|^${SWAP_FILE}[[:space:]]|d" /etc/fstab 2>/dev/null || true
-sudo rm -f "$SWAP_FILE"
+if [ ! -f "$SWAP_FILE" ] || [ "$(stat -c %s "$SWAP_FILE")" -ne "$SWAP_SIZE_BYTES" ]; then
+  sudo swapoff "$SWAP_FILE" 2>/dev/null || true
+  sudo rm -f "$SWAP_FILE"
 
-sudo fallocate -l "${MEMORY_GB}G" "$SWAP_FILE"
-sudo chmod 600 "$SWAP_FILE"
-sudo mkswap "$SWAP_FILE"
-sudo swapon "$SWAP_FILE"
-echo "${SWAP_FILE} none swap sw 0 0" | sudo tee -a /etc/fstab >/dev/null
+  sudo fallocate -l "${MEMORY_GB}G" "$SWAP_FILE"
+  sudo chmod 600 "$SWAP_FILE"
+  sudo mkswap "$SWAP_FILE"
+fi
+
+if ! swapon --show=NAME --noheadings | grep -Fxq "$SWAP_FILE"; then
+  sudo swapon --priority 10 "$SWAP_FILE"
+fi
+
+sudo sed -i "\|^${SWAP_FILE}[[:space:]]|d" /etc/fstab
+echo "$FSTAB_SWAP_LINE" | sudo tee -a /etc/fstab >/dev/null
 
 echo "--------------------------------------------------"
 echo "设置zram: ${ZRAM_SIZE_MB}M..."
 
-sudo apt install -y linux-modules-extra-$(uname -r) systemd-zram-generator
+if [ ! -e /sys/class/zram-control ]; then
+  sudo modprobe zram 2>/dev/null || {
+    sudo apt install -y "$ZRAM_MODULE_PACKAGE"
+    sudo modprobe zram
+  }
+fi
+dpkg -s systemd-zram-generator >/dev/null 2>&1 || sudo apt install -y systemd-zram-generator
 
 sudo tee "$ZRAM_CONFIG" >/dev/null <<EOF
 [zram0]
@@ -43,8 +59,17 @@ fs-type = swap
 EOF
 
 sudo systemctl daemon-reload
-# sudo systemctl restart /dev/zram0 || sudo systemctl start /dev/zram0
-sudo systemctl restart systemd-zram-setup@zram0.service || sudo systemctl start systemd-zram-setup@zram0.service
+sudo systemctl restart systemd-zram-setup@zram0.service
+
+echo "--------------------------------------------------"
+echo "设置swap使用策略..."
+
+sudo tee "$SYSCTL_CONFIG" >/dev/null <<EOF
+vm.swappiness=10
+vm.page-cluster=0
+EOF
+
+sudo sysctl -p "$SYSCTL_CONFIG"
 
 echo "--------------------------------------------------"
 echo "设置DNS: ${DNS_SERVER}, fallback: ${FALLBACK_DNS_SERVER}..."
@@ -58,7 +83,7 @@ FallbackDNS=${FALLBACK_DNS_SERVER}
 EOF
 
 sudo systemctl enable --now systemd-resolved.service
-sudo systemctl restart systemd-resolved.service
+sudo systemctl reload-or-restart systemd-resolved.service
 
 echo "--------------------------------------------------"
 echo "当前swap/zram状态:"
