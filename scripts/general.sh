@@ -52,6 +52,10 @@ if [ ! -e /sys/class/zram-control ]; then
   }
 fi
 
+if [ ! -e /sys/block/zram0 ]; then
+  sudo sh -c 'cat /sys/class/zram-control/hot_add >/dev/null'
+fi
+
 dpkg -s systemd-zram-generator >/dev/null 2>&1 || sudo apt install -y systemd-zram-generator
 
 sudo tee "$ZRAM_CONFIG" >/dev/null <<EOF
