@@ -63,7 +63,11 @@ fs-type = swap
 EOF
 
 sudo systemctl daemon-reload
-sudo systemctl restart systemd-zram-setup@zram0.service
+
+if ! systemctl is-active --quiet systemd-zram-setup@zram0.service; then
+  sudo zramctl --reset /dev/zram0 2>/dev/null || true
+  sudo systemctl start systemd-zram-setup@zram0.service
+fi
 
 echo "--------------------------------------------------"
 echo "设置内存交换策略..."
