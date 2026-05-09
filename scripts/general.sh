@@ -66,8 +66,7 @@ EOF
 sudo swapoff /dev/zram0 2>/dev/null || true
 sudo systemctl stop systemd-zram-setup@zram0.service 2>/dev/null || true
 sudo systemctl daemon-reload
-# sudo systemctl restart systemd-zram-setup@zram0.service
-sudo systemctl start /dev/zram
+sudo systemctl restart systemd-zram-setup@zram0.service
 
 echo "--------------------------------------------------"
 echo "设置内存交换策略..."
