@@ -64,7 +64,8 @@ swap-priority = 100
 EOF
 
 sudo systemctl daemon-reload
-sudo systemctl restart systemd-zram-setup@zram0.service
+# sudo systemctl restart systemd-zram-setup@zram0.service
+sudo systemctl start /dev/zram
 
 echo "--------------------------------------------------"
 echo "设置内存交换策略..."
