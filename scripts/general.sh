@@ -60,9 +60,7 @@ dpkg -s systemd-zram-generator >/dev/null 2>&1 || sudo apt install -y systemd-zr
 sudo tee "$ZRAM_CONFIG" >/dev/null <<EOF
 [zram0]
 zram-size = ${ZRAM_SIZE_MB}M
-compression-algorithm = zstd
 swap-priority = 100
-fs-type = swap
 EOF
 
 sudo systemctl daemon-reload
