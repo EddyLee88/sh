@@ -45,15 +45,14 @@ echo "$FSTAB_SWAP_LINE" | sudo tee -a /etc/fstab >/dev/null
 echo "--------------------------------------------------"
 echo "设置zram(${ZRAM_SIZE_MB}M)..."
 
-if [ ! -e /sys/class/zram-control ]; then
-  sudo modprobe zram 2>/dev/null || {
-    sudo apt install -y "$ZRAM_MODULE_PACKAGE"
-    sudo modprobe zram
-  }
-fi
+sudo modprobe zram 2>/dev/null || {
+  sudo apt install -y "$ZRAM_MODULE_PACKAGE"
+  sudo modprobe zram
+}
 
-if [ ! -e /sys/block/zram0 ]; then
-  sudo sh -c 'cat /sys/class/zram-control/hot_add >/dev/null'
+if [ ! -e /sys/class/zram-control ]; then
+  echo "错误: zram模块已加载但/sys/class/zram-control不存在。"
+  exit 1
 fi
 
 dpkg -s systemd-zram-generator >/dev/null 2>&1 || sudo apt install -y systemd-zram-generator
@@ -67,16 +66,7 @@ fs-type = swap
 EOF
 
 sudo systemctl daemon-reload
-
-if systemctl is-active --quiet systemd-zram-setup@zram0.service; then
-  sudo swapoff /dev/zram0 2>/dev/null || true
-  sudo systemctl stop systemd-zram-setup@zram0.service 2>/dev/null || true
-  sudo zramctl --reset /dev/zram0 2>/dev/null || true
-  sudo systemctl start systemd-zram-setup@zram0.service
-else
-  sudo zramctl --reset /dev/zram0 2>/dev/null || true
-  sudo systemctl start systemd-zram-setup@zram0.service
-fi
+sudo systemctl restart systemd-zram-setup@zram0.service
 
 echo "--------------------------------------------------"
 echo "设置内存交换策略..."
