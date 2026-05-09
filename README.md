@@ -1,7 +1,7 @@
 # 常用脚本
 
 - ### general.sh
-> 一键完成 Ubuntu/Debian 服务器基础初始化。
+> 配置SWAP/ZRAM/DNS
 
 ```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/general.sh)"
