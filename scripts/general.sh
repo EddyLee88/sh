@@ -55,7 +55,7 @@ sudo apt install -y systemd-zram-generator
 
 sudo tee "$ZRAM_CONFIG" >/dev/null <<EOF
 [zram0]
-zram-size = min(ram / 2, ${ZRAM_SIZE_MB}, 4 * 1024)
+zram-size = min(ram / 2, ${ZRAM_SIZE_MB}, ${MAX_SWAP_GB} * 1024 / 2)
 swap-priority = 20
 EOF
 
