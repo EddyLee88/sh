@@ -7,7 +7,8 @@ echo "当前用户:$USER"
 echo "--------------------------------------------------"
 echo "获取脚本变量..."
 
-MEMORY_GB=$(awk '/^MemTotal:/ {print int(($2 + 1024 * 1024 - 1) / (1024 * 1024))}' /proc/meminfo)
+MAX_SWAP_GB=8
+MEMORY_GB=$(awk -v max="$MAX_SWAP_GB" '/^MemTotal:/ {gb = int(($2 + 1024 * 1024 - 1) / (1024 * 1024)); if (gb > max) gb = max; print gb}' /proc/meminfo)
 SWAP_SIZE_BYTES=$(( MEMORY_GB * 1024 * 1024 * 1024 ))
 ZRAM_SIZE_MB=$(( MEMORY_GB * 1024 / 2 ))
 SWAP_FILE="/swapfile"
