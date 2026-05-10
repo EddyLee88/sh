@@ -31,7 +31,9 @@ sudo add-apt-repository ppa:zhangsongcui3371/fastfetch
 sudo apt update
 sudo apt install fastfetch -y
 
-sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
+fi
 
 echo "--------------------------------------------------"
 echo "设置swap分区(${MEMORY_GB}G)..."
@@ -103,6 +105,26 @@ echo "--------------------------------------------------"
 echo "当前DNS:"
 
 resolvectl dns
+
+echo "--------------------------------------------------"
+echo "关闭防火墙..."
+
+sudo ufw disable 2>/dev/null || true
+
+reset_iptables() {
+  command -v "$1" >/dev/null 2>&1 || return 0
+
+  for option in -F -X -Z; do
+    sudo "$1" "$option" 2>/dev/null || true
+  done
+
+  for chain in INPUT FORWARD OUTPUT; do
+    sudo "$1" -P "$chain" ACCEPT 2>/dev/null || true
+  done
+}
+
+reset_iptables iptables
+reset_iptables ip6tables
 
 echo "--------------------------------------------------"
 echo "DONE"
