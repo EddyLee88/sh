@@ -84,6 +84,7 @@ echo "--------------------------------------------------"
 echo "当前swap/zram状态:"
 
 swapon --show
+free -h
 
 echo "--------------------------------------------------"
 echo "设置DNS(${DNS_SERVER}/${FALLBACK_DNS_SERVER})..."
