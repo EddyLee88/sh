@@ -59,12 +59,12 @@ dpkg -s systemd-zram-generator >/dev/null 2>&1 || sudo apt install -y systemd-zr
 
 sudo tee "$ZRAM_CONFIG" >/dev/null <<EOF
 [zram0]
-zram-size = ${ZRAM_SIZE_MB}M
+zram-size = min(ram / 2, 4096)
 swap-priority = 100
 EOF
 
 sudo swapoff /dev/zram0 2>/dev/null || true
-sudo systemctl stop systemd-zram-setup@zram0.service 2>/dev/null || true
+# sudo systemctl stop systemd-zram-setup@zram0.service 2>/dev/null || true
 sudo systemctl daemon-reload
 sudo systemctl restart systemd-zram-setup@zram0.service
 
