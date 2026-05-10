@@ -27,9 +27,11 @@ sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
 sudo apt install zsh vim wget curl git podman software-properties-common -y
 
-sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y
-sudo apt update
-sudo apt install fastfetch -y
+if ! dpkg -s fastfetch >/dev/null 2>&1; then
+  sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y
+  sudo apt update
+  sudo apt install fastfetch -y
+fi
 
 echo "--------------------------------------------------"
 echo "设置swap分区(${MEMORY_GB}G)..."
