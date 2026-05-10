@@ -10,13 +10,13 @@ echo "获取脚本变量..."
 MEMORY_GB=$(awk '/^MemTotal:/ {print int(($2 + 1024 * 1024 - 1) / (1024 * 1024))}' /proc/meminfo)
 SWAP_SIZE_BYTES=$(( MEMORY_GB * 1024 * 1024 * 1024 ))
 ZRAM_SIZE_MB=$(( MEMORY_GB * 1024 / 2 ))
-DNS_SERVER="8.8.8.8"
-FALLBACK_DNS_SERVER="1.1.1.1"
 SWAP_FILE="/swapfile"
 FSTAB_SWAP_LINE="${SWAP_FILE} none swap defaults,pri=10 0 0"
 ZRAM_MODULE_PACKAGE="linux-modules-extra-$(uname -r)"
 ZRAM_CONFIG="/etc/systemd/zram-generator.conf"
 SYSCTL_CONFIG="/etc/sysctl.d/99-swap.conf"
+DNS_SERVER="8.8.8.8"
+FALLBACK_DNS_SERVER="1.1.1.1"
 
 echo "--------------------------------------------------"
 echo "更新apt仓库和软件包..."
@@ -50,20 +50,14 @@ sudo modprobe zram 2>/dev/null || {
   sudo modprobe zram
 }
 
-if [ ! -e /sys/class/zram-control ]; then
-  echo "错误: zram模块已加载但/sys/class/zram-control不存在。"
-  exit 1
-fi
-
-dpkg -s systemd-zram-generator >/dev/null 2>&1 || sudo apt install -y systemd-zram-generator
+sudo apt install -y systemd-zram-generator
 
 sudo tee "$ZRAM_CONFIG" >/dev/null <<EOF
 [zram0]
 zram-size = min(ram / 2, ${ZRAM_SIZE_MB}, 4 * 1024)
-swap-priority = 100
+swap-priority = 20
 EOF
 
-# sudo swapoff /dev/zram0 2>/dev/null || true
 sudo systemctl daemon-reload
 sudo systemctl restart systemd-zram-setup@zram0.service
 
@@ -71,11 +65,16 @@ echo "--------------------------------------------------"
 echo "设置内存交换策略..."
 
 sudo tee "$SYSCTL_CONFIG" >/dev/null <<EOF
-vm.swappiness=10
+vm.swappiness=20
 vm.page-cluster=0
 EOF
 
 sudo sysctl -p "$SYSCTL_CONFIG"
+
+echo "--------------------------------------------------"
+echo "当前swap/zram状态:"
+
+swapon --show
 
 echo "--------------------------------------------------"
 echo "设置DNS(${DNS_SERVER}/${FALLBACK_DNS_SERVER})..."
@@ -92,9 +91,9 @@ sudo systemctl enable --now systemd-resolved.service
 sudo systemctl reload-or-restart systemd-resolved.service
 
 echo "--------------------------------------------------"
-echo "当前swap/zram状态:"
+echo "当前DNS:"
 
-swapon --show
+resolvectl dns
 
 echo "--------------------------------------------------"
 echo "DONE"
