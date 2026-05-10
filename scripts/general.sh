@@ -27,13 +27,9 @@ sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
 sudo apt install zsh vim wget curl git podman software-properties-common -y
 
-sudo add-apt-repository ppa:zhangsongcui3371/fastfetch
+sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y
 sudo apt update
 sudo apt install fastfetch -y
-
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
-fi
 
 echo "--------------------------------------------------"
 echo "设置swap分区(${MEMORY_GB}G)..."
@@ -128,3 +124,7 @@ reset_iptables ip6tables
 
 echo "--------------------------------------------------"
 echo "DONE"
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
+fi
