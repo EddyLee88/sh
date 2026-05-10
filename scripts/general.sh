@@ -3,6 +3,7 @@
 set -eu
 
 echo "当前用户:$USER"
+cd ~
 
 echo "--------------------------------------------------"
 echo "获取脚本变量..."
@@ -24,6 +25,13 @@ echo "更新apt仓库和软件包..."
 
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
+sudo apt install zsh vim wget curl git podman software-properties-common -y
+
+sudo add-apt-repository ppa:zhangsongcui3371/fastfetch
+sudo apt update
+sudo apt install fastfetch -y
+
+sh -c "$(curl -fsSL https://install.ohmyz.sh/)"
 
 echo "--------------------------------------------------"
 echo "设置swap分区(${MEMORY_GB}G)..."
