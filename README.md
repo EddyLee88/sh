@@ -4,18 +4,18 @@
 > 初始化服务器(APT/PODMAN/SWAP/ZRAM/DNS/FireWall/OMZ)
 
 ```
-bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/init.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh -O -)"
 # OR
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/init.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh)"
 ```
 
 - ### podman_mysql.sh
 > 使用[Podman](https://github.com/containers/podman)配置MySQL数据库
 
 ```
-wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_mysql.sh
+wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_mysql.sh
 # OR
-curl -O https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_mysql.sh
+curl -O https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_mysql.sh
 
 # TODO replace UR_PWD/UR_DB with your actual config
 
@@ -28,9 +28,9 @@ chmod +x podman_mysql.sh
 > 使用[Podman](https://github.com/containers/podman)配置PostgreSQL数据库
 
 ```
-wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_pgsql.sh
+wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_pgsql.sh
 # OR
-curl -O https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_pgsql.sh
+curl -O https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_pgsql.sh
 
 # TODO replace UR_USER/UR_PWD/UR_DB with your actual config
 
@@ -43,9 +43,9 @@ chmod +x podman_pgsql.sh
 > 使用[Podman](https://github.com/containers/podman)配置[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)
 
 ```
-wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_cpa.sh
+wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_cpa.sh
 # OR
-curl -O https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_cpa.sh
+curl -O https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_cpa.sh
 
 # TODO replace PG_USER/PG_PWD/PG_HOST/PG_PORT/CPA_DB with your actual config
 
@@ -58,33 +58,33 @@ chmod +x podman_cpa.sh
 > 使用[Podman](https://github.com/containers/podman)配置[Codex Manager](https://github.com/wenfxl/openai-cpa)
 
 ```
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_codex_manager.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_codex_manager.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_codex_manager.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_codex_manager.sh)"
 ```
 
 - ### podman_caddy.sh
 > 使用[Podman](https://github.com/containers/podman)配置Caddy
 
 ```
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_caddy.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_caddy.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_caddy.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_caddy.sh)"
 ```
 
 - ### podman_rustdesk.sh
 > 使用[Podman](https://github.com/containers/podman)配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端
 
 ```
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk.sh)"
 ```
 自定义配置请使用以下方式
 ```
-wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk.sh
+wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk.sh
 # OR
-curl -O https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk.sh
+curl -O https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk.sh
 
 # TODO replace HBBS_PORT/HBBR_PORT with your actual config
 
@@ -97,15 +97,15 @@ chmod +x podman_rustdesk.sh
 > 使用[Podman](https://github.com/containers/podman)配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端(root运行)
 
 ```
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk_root.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk_root.sh)"
 ```
 自定义配置请使用以下方式
 ```
-wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh
+wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk_root.sh
 # OR
-curl -O https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh
+curl -O https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk_root.sh
 
 # TODO replace HBBS_PORT/HBBR_PORT with your actual config
 
