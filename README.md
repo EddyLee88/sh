@@ -1,12 +1,12 @@
 # 常用脚本
 
-- ### general.sh
-> 配置SWAP/ZRAM/DNS
+- ### init.sh
+> 初始化服务器(APT/PODMAN/SWAP/ZRAM/DNS/OMZ)
 
 ```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/general.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/init.sh)"
 # OR
-bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/general.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/init.sh -O -)"
 ```
 
 - ### podman_mysql.sh
