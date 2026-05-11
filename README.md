@@ -1,7 +1,7 @@
 # 常用脚本
 
 - ### init.sh
-> 初始化服务器(APT/PODMAN/SWAP/ZRAM/DNS/OMZ)
+> 初始化服务器(APT/PODMAN/SWAP/ZRAM/DNS/FireWall/OMZ)
 
 ```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/init.sh)"
