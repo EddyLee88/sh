@@ -4,9 +4,9 @@
 > 初始化服务器(APT/PODMAN/SWAP/ZRAM/DNS/FireWall/OMZ)
 
 ```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/init.sh)"
-# OR
 bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/init.sh -O -)"
+# OR
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/init.sh)"
 ```
 
 - ### podman_mysql.sh
@@ -58,27 +58,27 @@ chmod +x podman_cpa.sh
 > 使用[Podman](https://github.com/containers/podman)配置[Codex Manager](https://github.com/wenfxl/openai-cpa)
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_codex_manager.sh)"
-# OR
 sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_codex_manager.sh -O -)"
+# OR
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_codex_manager.sh)"
 ```
 
 - ### podman_caddy.sh
 > 使用[Podman](https://github.com/containers/podman)配置Caddy
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_caddy.sh)"
-# OR
 sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_caddy.sh -O -)"
+# OR
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_caddy.sh)"
 ```
 
 - ### podman_rustdesk.sh
 > 使用[Podman](https://github.com/containers/podman)配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk.sh)"
-# OR
 sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk.sh -O -)"
+# OR
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk.sh)"
 ```
 自定义配置请使用以下方式
 ```
@@ -97,9 +97,9 @@ chmod +x podman_rustdesk.sh
 > 使用[Podman](https://github.com/containers/podman)配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端(root运行)
 
 ```
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh)"
-# OR
 sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh -O -)"
+# OR
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/sh/main/scripts/podman_rustdesk_root.sh)"
 ```
 自定义配置请使用以下方式
 ```
