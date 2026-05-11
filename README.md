@@ -4,9 +4,9 @@
 > 初始化服务器(APT/PODMAN/SWAP/ZRAM/DNS/FireWall/OMZ)
 
 ```
-bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh -O -)"
 # OR
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh)"
 ```
 
 - ### podman_mysql.sh
