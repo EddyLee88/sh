@@ -1,7 +1,7 @@
 # 常用脚本
 
 - ### init.sh
-> 初始化服务器(APT/PODMAN/SWAP/ZRAM/DNS/FireWall/OMZ)
+> 初始化服务器(apt/Podman/SWAP/ZRAM/DNS/FireWall/OMZ)
 
 ```
 sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh -O -)"
