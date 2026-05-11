@@ -1,0 +1,47 @@
+name: Verify Ubuntu Scripts
+
+on:
+  workflow_dispatch:
+    inputs:
+      ubuntu_version:
+        description: 'Ubuntu版本(例如24.04)'
+        required: false
+        default: '24.04'
+        type: string
+      script_name:
+        description: '脚本文件名(/scripts目录下, 可多选, 例如init.sh,podman_caddy.sh)'
+        required: true
+        default: 'init.sh'
+        type: string
+
+jobs:
+  test-in-container:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:${{ github.event.inputs.ubuntu_version }}
+      options: --privileged -v /dev:/dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Test
+        run: |
+          IFS=',' read -ra SCRIPTS <<< "${{ github.event.inputs.script_name }}"
+
+          for script in "${SCRIPTS[@]}"; do
+            SCRIPT_PATH="scripts/$(echo "${script}" | xargs)"
+
+            if [ -f "$SCRIPT_PATH" ]; then
+              echo "执行脚本: $SCRIPT_PATH"
+              chmod +x "$SCRIPT_PATH"
+              ./"$SCRIPT_PATH"
+              echo "脚本执行完成: $SCRIPT_PATH"
+              echo "-----------------------------------"
+            else
+              echo "错误: $SCRIPT_PATH不存在"
+              ls -la scripts/
+              exit 1
+            fi
+          done
