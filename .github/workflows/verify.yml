@@ -27,6 +27,7 @@ jobs:
           ref: main
 
       - name: Test
+        shell: bash
         run: |
           IFS=',' read -ra SCRIPTS <<< "${{ github.event.inputs.script_name }}"
 
