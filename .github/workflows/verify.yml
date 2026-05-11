@@ -26,6 +26,13 @@ jobs:
         with:
           ref: main
 
+      - name: Preset
+        shell: bash
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          apt update
+          apt install sudo -y
+
       - name: Test
         shell: bash
         run: |
