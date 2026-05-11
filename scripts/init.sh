@@ -23,10 +23,6 @@ FALLBACK_DNS_SERVER="1.1.1.1"
 echo "--------------------------------------------------"
 echo "更新apt仓库和软件包..."
 
-if ! dpkg -s sudo >/dev/null 2>&1; then
-  apt install sudo -y
-fi
-
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
 sudo apt install zsh vim wget curl git podman software-properties-common -y
