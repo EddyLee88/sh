@@ -17,6 +17,7 @@ FSTAB_SWAP_LINE="${SWAP_FILE} none swap defaults,pri=10 0 0"
 ZRAM_MODULE_PACKAGE="linux-modules-extra-$(uname -r)"
 ZRAM_CONFIG="/etc/systemd/zram-generator.conf"
 SYSCTL_CONFIG="/etc/sysctl.d/99-swap.conf"
+PODMAN_CONFIG="/etc/sysctl.d/99-podman-rootless.conf"
 DNS_SERVER="8.8.8.8"
 FALLBACK_DNS_SERVER="1.1.1.1"
 
@@ -25,13 +26,27 @@ echo "更新apt仓库和软件包..."
 
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
-sudo apt install zsh vim wget curl git podman software-properties-common -y
+sudo apt install zsh vim wget curl git software-properties-common -y
+
+echo "--------------------------------------------------"
+echo "安装FastFetch..."
 
 if ! dpkg -s fastfetch >/dev/null 2>&1; then
   sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y
   sudo apt update
   sudo apt install fastfetch -y
 fi
+
+echo "--------------------------------------------------"
+echo "安装/配置Podman..."
+
+sudo apt install podman -y
+
+sudo tee "$PODMAN_CONFIG" >/dev/null <<EOF
+net.ipv4.ip_unprivileged_port_start=23
+EOF
+
+sudo sysctl -p "$PODMAN_CONFIG"
 
 echo "--------------------------------------------------"
 echo "设置swap分区(${MEMORY_GB}G)..."
