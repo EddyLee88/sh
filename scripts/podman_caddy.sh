@@ -10,6 +10,7 @@ echo "创建Podman服务配置目录..."
 
 mkdir -p ~/.config/containers/systemd/
 mkdir -p ~/caddy
+touch ~/caddy/Caddyfile
 
 echo "--------------------------------------------------"
 echo "配置Caddy服务..."
