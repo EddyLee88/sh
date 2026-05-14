@@ -13,14 +13,14 @@ mkdir -p ~/.config/containers/systemd/
 echo "--------------------------------------------------"
 echo "配置PostgreSQL服务..."
 
-cat > ~/.config/containers/systemd/postgres18.container <<'EOF'
+cat > ~/.config/containers/systemd/postgres.container <<'EOF'
 [Unit]
-Description=PostgreSQL18
+Description=PostgreSQL
 
 [Container]
 AutoUpdate=registry
-Image=docker.io/library/postgres:18
-ContainerName=postgres18
+Image=docker.io/library/postgres:latest
+ContainerName=postgres
 Network=host
 
 Environment="POSTGRES_USER=UR_USER"
@@ -30,7 +30,7 @@ Environment="POSTGRES_INITDB_ARGS=--encoding=UTF8 --lc-collate=C.UTF-8 --lc-ctyp
 
 Exec=-c listen_addresses="*"
 
-Volume=pgdata18:/var/lib/postgresql
+Volume=pgdata:/var/lib/postgresql
 
 [Service]
 Restart=always
@@ -48,8 +48,8 @@ systemctl --user daemon-reload
 echo "--------------------------------------------------"
 echo "启动服务..."
 
-systemctl --user start postgres18.service
-# systemctl --user enable --now postgres18.service
+systemctl --user start postgres.service
+# systemctl --user enable --now postgres.service
 
 echo "--------------------------------------------------"
 echo "配置自动启动/后台运行..."
