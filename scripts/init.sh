@@ -146,8 +146,8 @@ if command -v ufw >/dev/null 2>&1; then
   sudo ufw disable 2>/dev/null || true
   sudo systemctl stop ufw 2>/dev/null || true
   sudo systemctl disable ufw 2>/dev/null || true
-  sudo apt purge ufw -y 2>/dev/null || true
   sudo rm -rf /etc/ufw
+  sudo apt purge ufw -y 2>/dev/null || true
   sudo systemctl daemon-reload
 fi
 
