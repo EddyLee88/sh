@@ -123,26 +123,41 @@ resolvectl dns
 echo "--------------------------------------------------"
 echo "关闭防火墙..."
 
-# sudo ufw disable 2>/dev/null || true
+reset_iptables() {
+  command -v "$1" >/dev/null 2>&1 || return 0
 
-# reset_iptables() {
-#   command -v "$1" >/dev/null 2>&1 || return 0
+  for option in -F -X -Z; do
+    sudo "$1" "$option" 2>/dev/null || true
+  done
 
-#   for option in -F -X -Z; do
-#     sudo "$1" "$option" 2>/dev/null || true
-#   done
+  for chain in INPUT FORWARD OUTPUT; do
+    sudo "$1" -P "$chain" ACCEPT 2>/dev/null || true
+  done
+}
 
-#   for chain in INPUT FORWARD OUTPUT; do
-#     sudo "$1" -P "$chain" ACCEPT 2>/dev/null || true
-#   done
-# }
+reset_iptables iptables
+reset_iptables ip6tables
 
-# reset_iptables iptables
-# reset_iptables ip6tables
+sudo sh -c "iptables-save > /etc/iptables/rules.v4" 2>/dev/null || true
+sudo sh -c "ip6tables-save > /etc/iptables/rules.v6" 2>/dev/null || true
 
-sudo ufw default allow
-sudo ufw disable
-sudo ufw enable
+if command -v ufw >/dev/null 2>&1; then
+  sudo ufw --force reset 2>/dev/null || true
+  sudo ufw disable 2>/dev/null || true
+  sudo systemctl stop ufw 2>/dev/null || true
+  sudo systemctl disable ufw 2>/dev/null || true
+  sudo apt purge ufw -y 2>/dev/null || true
+  
+  # sudo rm -rf /etc/ufw
+  # sudo rm -rf /lib/ufw
+  # sudo rm -rf /var/lib/ufw
+  # sudo rm -f /usr/sbin/ufw
+  # sudo rm -f /usr/bin/ufw
+  # sudo rm -f /etc/init.d/ufw
+  # sudo rm -f /etc/systemd/system/ufw.service
+  # sudo rm -f /lib/systemd/system/ufw.service
+  sudo systemctl daemon-reload
+fi
 
 echo "--------------------------------------------------"
 echo "DONE"
