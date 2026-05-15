@@ -26,7 +26,7 @@ echo "更新apt仓库和软件包..."
 
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
-sudo apt install zsh vim wget curl git software-properties-common ufw -y
+sudo apt install zsh vim wget curl git software-properties-common -y
 
 echo "--------------------------------------------------"
 echo "安装FastFetch..."
