@@ -26,7 +26,7 @@ echo "更新apt仓库和软件包..."
 
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
-sudo apt install zsh vim wget curl git software-properties-common -y
+sudo apt install zsh vim wget curl git software-properties-common ufw -y
 
 echo "--------------------------------------------------"
 echo "安装FastFetch..."
@@ -123,22 +123,26 @@ resolvectl dns
 echo "--------------------------------------------------"
 echo "关闭防火墙..."
 
-sudo ufw disable 2>/dev/null || true
+# sudo ufw disable 2>/dev/null || true
 
-reset_iptables() {
-  command -v "$1" >/dev/null 2>&1 || return 0
+# reset_iptables() {
+#   command -v "$1" >/dev/null 2>&1 || return 0
 
-  for option in -F -X -Z; do
-    sudo "$1" "$option" 2>/dev/null || true
-  done
+#   for option in -F -X -Z; do
+#     sudo "$1" "$option" 2>/dev/null || true
+#   done
 
-  for chain in INPUT FORWARD OUTPUT; do
-    sudo "$1" -P "$chain" ACCEPT 2>/dev/null || true
-  done
-}
+#   for chain in INPUT FORWARD OUTPUT; do
+#     sudo "$1" -P "$chain" ACCEPT 2>/dev/null || true
+#   done
+# }
 
-reset_iptables iptables
-reset_iptables ip6tables
+# reset_iptables iptables
+# reset_iptables ip6tables
+
+sudo ufw default allow
+sudo ufw disable
+sudo ufw enable
 
 echo "--------------------------------------------------"
 echo "DONE"
