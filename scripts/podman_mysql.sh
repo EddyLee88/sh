@@ -23,6 +23,7 @@ Image=docker.io/library/mysql:8
 ContainerName=mysql8
 Network=host
 
+Environment="MYSQL_ROOT_HOST=%"
 Environment="MYSQL_ROOT_PASSWORD=UR_PWD"
 Environment="MYSQL_DATABASE=UR_DB"
 
