@@ -30,7 +30,7 @@ Image=ghcr.io/rustdesk/rustdesk-server:latest
 ContainerName=rustdesk-hbbs
 Network=host
 
-Exec=hbbs -p${HBBS_PORT:-8443}
+Exec=hbbs -p${HBBS_PORT:-21116}
 
 Volume=/opt/rustdesk-server/data:/root
 
@@ -56,7 +56,7 @@ Image=ghcr.io/rustdesk/rustdesk-server:latest
 ContainerName=rustdesk-hbbr
 Network=host
 
-Exec=hbbr -p${HBBR_PORT:-8444}
+Exec=hbbr -p${HBBR_PORT:-21117}
 
 Volume=/opt/rustdesk-server/data:/root
 
