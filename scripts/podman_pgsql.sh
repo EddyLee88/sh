@@ -24,9 +24,9 @@ Image=docker.io/library/postgres:latest
 ContainerName=postgres
 Network=host
 
-Environment="POSTGRES_USER=${PG_USER:-postgres}"
-Environment="POSTGRES_PASSWORD=${PG_PWD:-postgres}"
-Environment="POSTGRES_DB=${PG_DB:-postgres}"
+Environment="POSTGRES_USER=${PGSQL_USER:-postgres}"
+Environment="POSTGRES_PASSWORD=${PGSQL_PWD:-postgres}"
+Environment="POSTGRES_DB=${PGSQL_DB:-postgres}"
 Environment="POSTGRES_INITDB_ARGS=--encoding=UTF8 --lc-collate=C.UTF-8 --lc-ctype=C.UTF-8"
 
 Exec=-c listen_addresses="*"
