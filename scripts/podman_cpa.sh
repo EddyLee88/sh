@@ -4,6 +4,7 @@ set -eu
 
 echo "当前用户:${USER:-$(id -un)}"
 cd ~
+[ -f ~/.env ] && source ~/.env
 
 echo "--------------------------------------------------"
 echo "创建Podman服务配置目录..."
@@ -13,7 +14,7 @@ mkdir -p ~/.config/containers/systemd/
 echo "--------------------------------------------------"
 echo "配置CLIProxyAPI服务..."
 
-cat > ~/.config/containers/systemd/cpa.container <<'EOF'
+cat > ~/.config/containers/systemd/cpa.container <<EOF
 [Unit]
 Description=CLIProxyAPI
 
@@ -24,7 +25,7 @@ ContainerName=cpa
 Network=host
 
 Environment="DEPLOY=cloud"
-Environment="PGSTORE_DSN=postgresql://PG_USER:PG_PWD@PG_HOST:PG_PORT/CPA_DB"
+Environment="PGSTORE_DSN=postgresql://${PG_USER:-postgres}:${PG_PWD:-postgres}@${PG_HOST:-127.0.0.1}:${PG_PORT:-5432}/${CPA_DB:-cpa}"
 Environment="PGSTORE_SCHEMA=public"
 Environment="PGSTORE_LOCAL_PATH=/var/lib/cliproxy"
 
