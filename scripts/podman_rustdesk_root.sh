@@ -9,6 +9,7 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 cd ~
+[ -f ~/.env ] && source ~/.env
 
 echo "--------------------------------------------------"
 echo "初始化配置目录..."
@@ -19,7 +20,7 @@ mkdir -p /opt/rustdesk-server/data
 echo "--------------------------------------------------"
 echo "配置rustdesk-hbbs服务..."
 
-cat > /etc/containers/systemd/rustdesk-hbbs.container <<'EOF'
+cat > /etc/containers/systemd/rustdesk-hbbs.container <<EOF
 [Unit]
 Description=RustDesk ID Server(hbbs)
 
@@ -29,7 +30,7 @@ Image=ghcr.io/rustdesk/rustdesk-server:latest
 ContainerName=rustdesk-hbbs
 Network=host
 
-Exec=hbbs -p8443
+Exec=hbbs -p${HBBS_PORT:-8443}
 
 Volume=/opt/rustdesk-server/data:/root
 
@@ -44,7 +45,7 @@ EOF
 echo "--------------------------------------------------"
 echo "配置rustdesk-hbbr服务..."
 
-cat > /etc/containers/systemd/rustdesk-hbbr.container <<'EOF'
+cat > /etc/containers/systemd/rustdesk-hbbr.container <<EOF
 [Unit]
 Description=RustDesk Relay Server(hbbr)
 After=rustdesk-hbbs.service
@@ -55,7 +56,7 @@ Image=ghcr.io/rustdesk/rustdesk-server:latest
 ContainerName=rustdesk-hbbr
 Network=host
 
-Exec=hbbr -p8444
+Exec=hbbr -p${HBBR_PORT:-8444}
 
 Volume=/opt/rustdesk-server/data:/root
 
