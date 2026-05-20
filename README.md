@@ -4,7 +4,7 @@
 
 ```bash
 cat > ~/.env <<EOF
-MYSQL_ROOT_PWD=mysql
+MYSQL_ROOT_PWD=root
 MYSQL_DB=mysql
 
 PGSQL_USER=postgres
