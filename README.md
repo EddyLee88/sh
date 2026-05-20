@@ -4,14 +4,19 @@
 
 ```bash
 cat > ~/.env <<EOF
-MYSQL_ROOT_PWD=root
+MYSQL_ROOT_PWD=mysql
 MYSQL_DB=mysql
-PG_USER=postgres
-PG_PWD=postgres
-PG_DB=postgres
+
+PGSQL_USER=postgres
+PGSQL_PWD=postgres
+PGSQL_DB=postgres
+
 PG_HOST=127.0.0.1
 PG_PORT=5432
+PG_USER=cpa
+PG_PWD=cpa
 CPA_DB=cpa
+
 HBBS_PORT=8443
 HBBR_PORT=8444
 EOF
