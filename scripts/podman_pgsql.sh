@@ -27,6 +27,7 @@ Network=host
 Environment="POSTGRES_USER=${PGSQL_USER:-postgres}"
 Environment="POSTGRES_PASSWORD=${PGSQL_PWD:-postgres}"
 Environment="POSTGRES_DB=${PGSQL_DB:-postgres}"
+Environment="POSTGRES_HOST_AUTH_METHOD=scram-sha-256"
 Environment="POSTGRES_INITDB_ARGS=--encoding=UTF8 --lc-collate=C.UTF-8 --lc-ctype=C.UTF-8"
 
 Exec=-c listen_addresses="*"
