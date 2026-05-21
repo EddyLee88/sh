@@ -26,70 +26,70 @@ EOF
 > 初始化服务器(apt/Podman/SWAP/ZRAM/DNS/FireWall/OMZ)
 
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/init.sh)"
 ```
 
 - ### podman_mysql.sh
 > 使用[Podman](https://github.com/containers/podman)配置MySQL数据库
 
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_mysql.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_mysql.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_mysql.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_mysql.sh)"
 ```
 
 - ### podman_pgsql.sh
 > 使用[Podman](https://github.com/containers/podman)配置PostgreSQL数据库
 
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_pgsql.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_pgsql.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_pgsql.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_pgsql.sh)"
 ```
 
 - ### podman_cpa.sh
 > 使用[Podman](https://github.com/containers/podman)配置[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)
 
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_cpa.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_cpa.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_cpa.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_cpa.sh)"
 ```
 
 - ### podman_codex_manager.sh
 > 使用[Podman](https://github.com/containers/podman)配置[Codex Manager](https://github.com/wenfxl/openai-cpa)
 
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_codex_manager.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_codex_manager.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_codex_manager.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_codex_manager.sh)"
 ```
 
 - ### podman_caddy.sh
 > 使用[Podman](https://github.com/containers/podman)配置Caddy
 
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_caddy.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_caddy.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_caddy.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_caddy.sh)"
 ```
 
 - ### podman_rustdesk.sh
 > 使用[Podman](https://github.com/containers/podman)配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端
 
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk.sh)"
 ```
 
 - ### podman_rustdesk_root.sh
 > 使用[Podman](https://github.com/containers/podman)配置[RustDesk](https://github.com/rustdesk/rustdesk-server)服务端(root运行)
 
 ```bash
-sh -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk_root.sh -O -)"
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk_root.sh -O -)"
 # OR
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk_root.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_rustdesk_root.sh)"
 ```
