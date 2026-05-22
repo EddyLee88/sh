@@ -13,8 +13,8 @@ PGSQL_DB=postgres
 
 PG_HOST=127.0.0.1
 PG_PORT=5432
-PG_USER=postgres
-PG_PWD=postgres
+PG_USER=cpa
+PG_PWD=cpa
 CPA_DB=cpa
 
 HBBS_PORT=21116
