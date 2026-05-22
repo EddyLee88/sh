@@ -19,12 +19,12 @@ cat > ~/.config/containers/systemd/postgres.container <<EOF
 Description=PostgreSQL
 
 [Container]
-Timezone=local
 AutoUpdate=registry
 Image=docker.io/library/postgres:18
 ContainerName=postgres
 HostName=postgres
 Network=host
+Timezone=local
 
 Environment="POSTGRES_USER=${PGSQL_USER:-postgres}"
 Environment="POSTGRES_PASSWORD=${PGSQL_PWD:-postgres}"
