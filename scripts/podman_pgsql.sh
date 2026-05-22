@@ -21,7 +21,7 @@ Description=PostgreSQL
 [Container]
 Timezone=local
 AutoUpdate=registry
-Image=docker.io/library/postgres:latest
+Image=docker.io/library/postgres:18
 ContainerName=postgres
 HostName=postgres
 Network=host
