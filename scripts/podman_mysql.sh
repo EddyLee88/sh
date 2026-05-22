@@ -14,15 +14,17 @@ mkdir -p ~/.config/containers/systemd/
 echo "--------------------------------------------------"
 echo "配置MySQL服务..."
 
-cat > ~/.config/containers/systemd/mysql8.container <<EOF
+cat > ~/.config/containers/systemd/mysql.container <<EOF
 [Unit]
-Description=MySQL8
+Description=MySQL
 
 [Container]
 AutoUpdate=registry
 Image=docker.io/library/mysql:8
-ContainerName=mysql8
+ContainerName=mysql
+HostName=mysql
 Network=host
+Timezone=local
 
 # Environment="MYSQL_ROOT_HOST=%"
 Environment="MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PWD:-root}"
@@ -30,7 +32,7 @@ Environment="MYSQL_DATABASE=${MYSQL_DB:-mysql}"
 
 Exec=--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
-Volume=mysqldata8:/var/lib/mysql
+Volume=mysqldata:/var/lib/mysql
 
 [Service]
 Restart=always
@@ -48,8 +50,8 @@ systemctl --user daemon-reload
 echo "--------------------------------------------------"
 echo "启动服务..."
 
-systemctl --user start mysql8.service
-# systemctl --user enable --now mysql8.service
+systemctl --user start mysql.service
+# systemctl --user enable --now mysql.service
 
 echo "--------------------------------------------------"
 echo "配置自动启动/后台运行..."
