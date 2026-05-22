@@ -8,6 +8,7 @@ cd ~
 echo "--------------------------------------------------"
 echo "获取脚本变量..."
 
+TIMEZ="Asia/Shanghai"
 MAX_SWAP_GB=8
 MEMORY_GB=$(awk -v max="$MAX_SWAP_GB" '/^MemTotal:/ {gb = int(($2 + 1024 * 1024 - 1) / (1024 * 1024)); if (gb > max) gb = max; print gb}' /proc/meminfo)
 SWAP_SIZE_BYTES=$(( MEMORY_GB * 1024 * 1024 * 1024 ))
@@ -36,6 +37,19 @@ if ! dpkg -s fastfetch >/dev/null 2>&1; then
   sudo apt update
   sudo apt install fastfetch -y
 fi
+
+echo "--------------------------------------------------"
+echo "设置时区..."
+
+sudo timedatectl set-timezone "$TIMEZ"
+sudo timedatectl set-local-rtc 0
+sudo timedatectl set-ntp true
+
+echo "--------------------------------------------------"
+echo "当前时间状态:"
+
+date
+timedatectl status
 
 echo "--------------------------------------------------"
 echo "安装/配置Podman..."
