@@ -19,6 +19,7 @@ cat > ~/.config/containers/systemd/postgres.container <<EOF
 Description=PostgreSQL
 
 [Container]
+Timezone=local
 AutoUpdate=registry
 Image=docker.io/library/postgres:latest
 ContainerName=postgres
