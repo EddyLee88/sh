@@ -64,3 +64,8 @@ systemctl --user enable --now podman-auto-update.timer
 
 echo "--------------------------------------------------"
 echo "DONE"
+
+# podman exec -e PGPASSWORD=${PGSQL_PWD:-postgres} -i postgres psql -U ${PGSQL_USER:-postgres} <<EOF
+# CREATE USER ${PG_USER:-cpa} WITH PASSWORD '${PG_PWD:-cpa}' NOSUPERUSER NOCREATEDB NOCREATEROLE;
+# CREATE DATABASE ${CPA_DB:-cpa} OWNER ${PG_USER:-cpa} ENCODING 'UTF8' LC_COLLATE 'C.UTF-8' LC_CTYPE 'C.UTF-8';
+# EOF
