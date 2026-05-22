@@ -22,9 +22,18 @@ Description=Codex Manager(openai-cpa)
 AutoUpdate=registry
 Image=docker.io/wenfxl/wenfxl-codex-manager:latest
 ContainerName=codex
+HostName=codex
 Network=host
+Timezone=local
 
 Environment="HOST_PROJECT_PATH=%h/openai-cpa"
+Environment="TZ=Asia/Shanghai"
+Environment="DB_TYPE=mysql"
+Environment="DB_HOST=${MS_HOST:-127.0.0.1}"
+Environment="DB_PORT=${MS_PORT:-3306}"
+Environment="DB_USER=${MS_USER:-codex}"
+Environment="DB_PASS=${MS_PWD:-codex}"
+Environment="DB_NAME=${CODEX_DB:-codex}"
 
 Volume=codexdata:/app/data
 
