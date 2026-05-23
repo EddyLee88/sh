@@ -3,62 +3,39 @@
 set -eu
 
 echo "当前用户:${USER:-$(id -un)}"
+if [ "$(id -u)" -ne 0 ]; then
+    echo "--------------------------------------------------"
+    echo "请root运行..."
+    exit 1
+fi
 cd ~
 [ -f ~/.env ] && source ~/.env
 
 echo "--------------------------------------------------"
-echo "创建Podman服务配置目录..."
+echo "创建ubuntu用户..."
 
-mkdir -p ~/.config/containers/systemd/
-mkdir -p ~/caddy
-touch ~/caddy/Caddyfile
+if id "ubuntu" &>/dev/null; then
+    echo "--------------------------------------------------"
+    echo "用户ubuntu已存在"
+    exit 1
+fi
 
-echo "--------------------------------------------------"
-echo "配置Caddy服务..."
-
-cat > ~/.config/containers/systemd/caddy.container <<'EOF'
-[Unit]
-Description=Caddy
-# After=cpa.service
-
-[Container]
-AutoUpdate=registry
-Image=docker.io/library/caddy:latest
-ContainerName=caddy
-Network=host
-
-Volume=%h/caddy/Caddyfile:/etc/caddy/Caddyfile
-Volume=caddydata:/data
-Volume=caddyconfig:/config
-
-[Service]
-Restart=always
-RestartSec=30
-
-[Install]
-WantedBy=default.target
-EOF
+useradd -m -U -s /bin/bash ubuntu
+passwd -d ubuntu
+usermod -aG sudo ubuntu
+echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/90-cloud-init-users
+chmod 0440 /etc/sudoers.d/90-cloud-init-users
+visudo -cf /etc/sudoers.d/90-cloud-init-users
 
 echo "--------------------------------------------------"
-echo "刷新服务列表..."
+echo "配置ssh公钥..."
 
-systemctl --user daemon-reload
-
-echo "--------------------------------------------------"
-echo "启动服务..."
-
-systemctl --user start caddy.service
-# systemctl --user enable --now caddy.service
-
-echo "--------------------------------------------------"
-echo "配置自动启动/后台运行..."
-
-sudo loginctl enable-linger $USER
-
-echo "--------------------------------------------------"
-echo "配置自动更新..."
-
-systemctl --user enable --now podman-auto-update.timer
+mkdir -p /home/ubuntu/.ssh
+cp ~/.ssh/authorized_keys /home/ubuntu/.ssh/authorized_keys
+chown -R ubuntu:ubuntu /home/ubuntu
+chmod 700 /home/ubuntu/.ssh
+chmod 600 /home/ubuntu/.ssh/authorized_keys
+rm -f ~/.ssh/authorized_keys
 
 echo "--------------------------------------------------"
 echo "DONE"
