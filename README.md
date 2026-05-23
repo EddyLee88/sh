@@ -28,6 +28,15 @@ HBBR_PORT=21117
 EOF
 ```
 
+- ### create_user_ubuntu.sh
+> 为不存在ubuntu用户的环境创建ubuntu用户(root运行)
+
+```bash
+bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/create_user_ubuntu.sh -O -)"
+# OR
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/create_user_ubuntu.sh)"
+```
+
 - ### init.sh
 > 初始化服务器(apt/Podman/SWAP/ZRAM/DNS/FireWall/OMZ)
 
