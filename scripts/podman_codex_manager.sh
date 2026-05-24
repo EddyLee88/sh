@@ -14,7 +14,7 @@ mkdir -p ~/.config/containers/systemd/
 echo "--------------------------------------------------"
 echo "配置Codex Manager服务..."
 
-cat > ~/.config/containers/systemd/codex.container <<'EOF'
+cat > ~/.config/containers/systemd/codex.container <<EOF
 [Unit]
 Description=Codex Manager(openai-cpa)
 
