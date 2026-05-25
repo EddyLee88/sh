@@ -83,7 +83,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main
 ```
 
 - ### podman_caddy.sh
-> 使用[Podman](https://github.com/containers/podman)配置Caddy
+> 使用[Podman](https://github.com/containers/podman)配置[Caddy](https://github.com/caddyserver/caddy)
 
 ```bash
 bash -c "$(wget https://raw.githubusercontent.com/EddyLee88/ubuntu_sh/main/scripts/podman_caddy.sh -O -)"
