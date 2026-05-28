@@ -28,6 +28,7 @@ Timezone=local
 
 Environment="HOST_PROJECT_PATH=%h/openai-cpa"
 Environment="TZ=Asia/Shanghai"
+Environment="WEB_HOST=127.0.0.1"
 Environment="DB_TYPE=mysql"
 Environment="DB_HOST=${MS_HOST:-127.0.0.1}"
 Environment="DB_PORT=${MS_PORT:-3306}"
